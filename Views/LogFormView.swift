@@ -15,7 +15,7 @@ struct LogFormView: View {
     #if !os(macOS)
     
     var title: String {
-        ((vm.logToEdit == nil) ? "Create" : "Edit") + " Expenses log"
+        ((vm.logToEdit == nil) ? "Добавить" : "Редактировать") + " расходы"
     }
     
     var body: some View {
@@ -23,14 +23,14 @@ struct LogFormView: View {
             formView
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
+                        Button("Сохранить") {
                             self.onSaveTapped()
                         }
                         .disabled(vm.isSaveButtonDisable)
                     }
                     
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
+                        Button("Отмена") {
                             self.onCancelTapped()
                         }
                     }

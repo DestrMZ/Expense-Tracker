@@ -26,5 +26,5 @@ struct CategoryImageView: View {
 }
 
 #Preview {
-    CategoryImageView(category: .food)
+    CategoryImageView(category: .houseRU)
 }

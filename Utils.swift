@@ -9,11 +9,11 @@ import Foundation
 
 struct Utils {
     
-    static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM"
+    static let dateFormatter: RelativeDateTimeFormatter = {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
         return formatter
-    }()
+        }()
     
     static var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()

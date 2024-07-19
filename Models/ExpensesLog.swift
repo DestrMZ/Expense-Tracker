@@ -17,7 +17,7 @@ struct ExpensesLog: Codable, Identifiable, Equatable {
     var date: Date
     
     var categoryEnum: Category {
-        Category(rawValue: category) ?? .food
+        Category(rawValue: category) ?? .educationRU
     }
     
     init(id: String, name: String, category: String, amount: Double, currency: String = "RUB", date: Date) {
@@ -34,8 +34,9 @@ struct ExpensesLog: Codable, Identifiable, Equatable {
 extension ExpensesLog {
     
     var dateText: String {
-        Utils.dateFormatter.string(from: date)
+        Utils.dateFormatter.localizedString(for: date, relativeTo: Date())
     }
+    
     
     var amountText: String {
         Utils.numberFormatter.currencySymbol = currency

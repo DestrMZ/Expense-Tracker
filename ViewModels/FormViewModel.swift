@@ -17,7 +17,7 @@ class FormViewModel: ObservableObject {
     
     @Published var name = ""
     @Published var amount: Double = 0
-    @Published var category = Category.utilities
+    @Published var category = Category.houseRU
     @Published var date = Date()
     
     var isSaveButtonDisable: Bool {

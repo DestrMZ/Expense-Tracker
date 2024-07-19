@@ -13,57 +13,65 @@ struct ContentView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
     var body: some View {
-        #if os(macOS)
+    #if os(macOS)
         splitView
-        #elseif os(visionOS)
+    #elseif os(visionOS)
         tabView
-        #else
+    #else
         switch horizontalSizeClass {
         case .compact: tabView
         default: splitView
         }
-        #endif
+    #endif
     }
     
-    var tabView: some View {
+    var tabView: some View { // for iOS
+        
         TabView {
+            NavigationStack {
+                DashboardTabView()
+            }
+                .tabItem {
+                    VStack {
+                        Text("Expenses")
+                        Image(systemName: "dollarsign.square")
+                    }
+                }
+                .tag(1)
+            
             NavigationStack {
                 LogListContainerView(vm: $vm)
             }
-            .tabItem {
-                Label("Expenses", systemImage: "tray")
-            }.tag(1)
-            
-            NavigationStack {
-                Text("AI Assistant")
-            }
-            
-            .tabItem {
-                Label("AI Assistant", systemImage: "waveform")
-            }.tag(2)
+                .tabItem {
+                    VStack {
+                        Text("History")
+                        Image(systemName: "tray")
+                    }
+                }
+                .tag(2)
         }
     }
     
-    var splitView: some View {
+    
+    var splitView: some View { // for macOS
         NavigationSplitView {
             List {
-                NavigationLink(destination:
-                                LogListContainerView(vm: $vm)) {
-                    Label("Expenses", systemImage: "tray")
+                NavigationLink(destination: Text("Expenses")) {
+                    Label("Expenses", systemImage: "dollarsign.square")
+                    
                 }
-                
-                NavigationLink(destination: Text("AI Assistant"))
-                {
-                    Label("AI Assistant", systemImage: "waveform")
+                NavigationLink(destination: LogListContainerView(vm: $vm)) {
+                    Label("History", systemImage: "tray")
                 }
             }
         } detail: {
             LogListContainerView(vm: $vm)
         }
-        .navigationTitle("Expenses tracker")
+        .navigationTitle("Money Tracker")
     }
 }
 
 #Preview {
     ContentView()
 }
+    

@@ -10,11 +10,16 @@ import SwiftUI
 struct LogListContainerView: View {
     
     @Binding var vm: LogListViewModel
+    @State private var searchText: String = ""
+    @State private var searchBarHeight: CGFloat = 0
+    @State private var sortType = SortType.date
+    @State private var sortOrder = SortOrder.descending
     
     var body: some View {
         VStack(spacing: 0) {
             
             FilterCategoriesView(selectedCategories: $vm.selectedCategories)
+            SearchBar(text: $searchText, keyboardHeight: $searchBarHeight, placeholder: "Search expenses")
             Divider()
             SelectSortOrderView(sortType: $vm.sortType, sortOrder: $vm.sortOrder)
             Divider()
@@ -43,7 +48,7 @@ struct LogListContainerView: View {
             LogFormView(vm: .init())
         }
         #if !os(macOS)
-        .navigationBarTitle("Expenses tracker", displayMode: .inline)
+        .navigationBarTitle("Money Tracker", displayMode: .inline)
         #endif
     }
 }

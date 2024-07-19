@@ -30,3 +30,24 @@ enum SortOrder: String, Identifiable, CaseIterable {
     var id: Self { self }
     case ascending, descending
 }
+
+
+//struct ExpenseLogSort {
+//    var sortType: SortType
+//    var sortOrder: SortOrder
+//    
+//    var isAscending: Bool {
+//        sortOrder == .ascending ? true : false
+//    }
+//    
+//    var sortDescription: NSSortDescriptor {
+//        switch sortType {
+//        case .date:
+//            return NSSortDescriptor(keyPath: \ExpensesLog.date, ascending: isAscending)
+//        case .amount:
+//            return NSSortDescriptor(keyPath: \ExpensesLog.amount, ascending: isAscending)
+//        case .name:
+//            return NSSortDescriptor(keyPath: \ExpensesLog.name, ascending: isAscending)
+//        }
+//    }
+//}

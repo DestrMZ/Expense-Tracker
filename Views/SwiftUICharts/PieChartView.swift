@@ -25,13 +25,11 @@ public struct PieChartView: View {
     
     public var body: some View {
         ZStack {
-            // Круговая диаграмма
             PieChartRow(data: data, backgroundColor: self.style.backgroundColor, accentColor: self.style.accentColor)
                 .foregroundColor(self.style.accentColor)
                 .padding(12)
                 .frame(width: self.formSize.width, height: self.formSize.height)
             
-            // Внутреннее кольцо с текстом
             Circle()
                 .fill(self.style.backgroundColor) // Фон внутреннего кольца
                 .frame(width: self.formSize.width * 0.6, height: self.formSize.height * 0.6) // Размер кольца (60% от диаграммы)

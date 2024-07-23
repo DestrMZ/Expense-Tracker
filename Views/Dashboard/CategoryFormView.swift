@@ -5,9 +5,17 @@
 //  Created by Ivan Maslennikov on 19.07.2024.
 //
 
+/**
+ Представление формы категории.
+
+ `CategoryFormView` отображает изображение категории, ее название и сумму расходов, относящихся к этой категории.
+ */
+
+
 import SwiftUI
 
 struct CategoryFormView: View {
+    
     
     let category: Category
     let sum: Double

@@ -50,12 +50,27 @@ struct LogListContainerView: View {
         #if !os(macOS)
         .navigationBarTitle("Money Tracker", displayMode: .inline)
         #endif
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
+
+    private func hideKeyboard() {
+        UIApplication.shared.endEditing()
+    }
+    
 }
 
 #Preview {
     @State var vm = LogListViewModel()
     return NavigationStack {
         LogListContainerView(vm: $vm)
+    }
+}
+
+
+extension UIApplication {
+    func endEditing() {
+        windows.filter { $0.isKeyWindow }.first?.endEditing(true)
     }
 }

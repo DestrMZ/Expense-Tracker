@@ -11,31 +11,62 @@ import Firebase
 
 struct DashboardTabView: View {
     @StateObject private var viewModel = ExpensesViewModel()
+    @State private var currentBalance: Double? = 43_065
     
     var body: some View {
         
-        VStack(spacing: 0) {
+        Spacer(minLength: 10)
+        
+        HStack {
+            
+            Image(systemName: "person.circle")
+                .font(.largeTitle)
+            
+            Text("Welcome, ")
+                .foregroundStyle(.gray)
+                .font(.headline)
+            
+            Text("Ivan!")
+                .bold()
+                .font(.headline)
+            
+        }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        
+        Divider()
+        Spacer(minLength: 25)
+        
+        VStack(spacing: 2) {
             VStack(spacing: 4) {
                 if viewModel.totalExpense != nil {
-                    Text("Total expenses")
-                        .font(.headline)
-                    Text(String(format: "%.2f ₽", viewModel.totalExpense ?? "Loading..."))
-                        .font(.largeTitle)
-                        .padding(.vertical)
+                    HStack {
+                        
+                        Text(String(format: "₽ %.2f", currentBalance ?? 0.0))
+                            .font(.title)
+                            .bold()
+                            .foregroundStyle(.gray)
+                        Text("Balance")
+                            .font(.subheadline)
+                            .foregroundStyle(.gray)
+                            
+                    }
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
+             
             
-            
-            
-            if !viewModel.categorySum.isEmpty {
-                PieChartView(
-                    data: viewModel.categorySum.map { ($0.sum, $0.category.color) }, totalExpenses: viewModel.totalExpense ?? 0,
-                    style: Styles.pieChartStyleOne,
-                    form: CGSize(width: 300, height: 240),
-                    dropShadow: false)
-            }
-            
-            Divider()
+            HStack {
+                if !viewModel.categorySum.isEmpty {
+                    PieChartView(
+                        data: viewModel.categorySum.map { ($0.sum, $0.category.color) }, totalExpenses: viewModel.totalExpense ?? 0,
+                        style: Styles.pieChartStyleOne,
+                        form: CGSize(width: 300, height: 240),
+                        dropShadow: false)
+                }
+            }.frame(width: 200, height: 250, alignment: .center)
+
             
             List {
                 
@@ -50,11 +81,10 @@ struct DashboardTabView: View {
                     .multilineTextAlignment(.center)
                     .font(.headline)
                     .padding(.horizontal)
+                
             }
-            
         }
     }
-    
 }
 
 
@@ -67,25 +97,8 @@ struct CategorySum: Identifiable, Equatable {
     }
 }
 
+
+
 #Preview {
     DashboardTabView()
 }
-
-//
-//VStack {
-//    Text("Total Expenses: \(viewModel.totalExpense, specifier: "%.2f")")
-//        .font(.headline)
-//        .padding()
-//    
-//    List(viewModel.categorySum) { categorySum in
-//        HStack {
-//            Text(categorySum.category?.rawValue.capitalized ?? "Unknown")
-//            Spacer()
-//            Text("\(categorySum.sum ?? 0, specifier: "%.2f")")
-//        }
-//    }
-//}
-//.navigationTitle("Dashboard")
-//.onAppear {
-//    viewModel.fetchExpensesLogs()
-//}
